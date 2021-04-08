@@ -10,8 +10,7 @@ use App\Page;
 use App\Service;
 use App\Portfolio;
 use App\People;
-
-
+use Illuminate\Support\Facades\DB;
 
 
 class IndexController extends Controller
@@ -20,9 +19,11 @@ class IndexController extends Controller
     public function execute (Request $request) {
 
         $pages = Page::all();
-        $portfolio = Portfolio::get(array('name', 'filter'));
-        $services = Service::where('id', '<', 20)->get();
+        $portfolios = Portfolio::get(array('name','filter','images'));
+        $services = Service::where('id','<',20)->get();
         $peoples = People::take(3)->get();
+
+        $tags = DB::table('portfolios')->distinct()->lists('filter');
 
         $menu = array();
         foreach ($pages as $page){
@@ -41,7 +42,7 @@ class IndexController extends Controller
         $item = array('title'=>'Team', 'alias'=>'team');
         array_push($menu, $item);
 
-        //Team
+        //Contact
         $item = array('title'=>'Contact', 'alias'=>'contact');
         array_push($menu, $item);
 
@@ -50,8 +51,9 @@ class IndexController extends Controller
             'menu'=>$menu,
             'pages'=>$pages,
             'services'=>$services,
-            'portfolio'=>$portfolio,
-            'peoples'=>$peoples
+            'portfolios'=>$portfolios,
+            'peoples'=>$peoples,
+            'tags'=>$tags
 
         ));
     }

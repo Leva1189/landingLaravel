@@ -12,6 +12,8 @@ use App\Portfolio;
 use App\People;
 
 
+
+
 class IndexController extends Controller
 {
     //
@@ -22,9 +24,35 @@ class IndexController extends Controller
         $services = Service::where('id', '<', 20)->get();
         $peoples = People::take(3)->get();
 
+        $menu = array();
+        foreach ($pages as $page){
+            $item = array('title'=>$page->name, 'alias'=>$page->alias);
+            array_push($menu, $item);
+        }
+        //Services
+        $item = array('title'=>'Services', 'alias'=>'service');
+        array_push($menu, $item);
+
+        //Portfolio
+        $item = array('title'=>'Portfolio', 'alias'=>'Portfolio');
+        array_push($menu, $item);
+
+        //Team
+        $item = array('title'=>'Team', 'alias'=>'team');
+        array_push($menu, $item);
+
+        //Team
+        $item = array('title'=>'Contact', 'alias'=>'contact');
+        array_push($menu, $item);
 
 
+        return view ('site.index', array(
+            'menu'=>$menu,
+            'pages'=>$pages,
+            'services'=>$services,
+            'portfolio'=>$portfolio,
+            'peoples'=>$peoples
 
-        return view ('site.index');
+        ));
     }
 }

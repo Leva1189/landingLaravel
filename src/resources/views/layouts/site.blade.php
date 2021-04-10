@@ -19,7 +19,6 @@
 
 </head>
 <body>
-
 <!--Header_section-->
 <header id="header_wrapper">
     @yield('header')
@@ -28,9 +27,7 @@
 
 <!--Hero_Section-->
 
-<!--Hero_Section-->
-
-    @yield('content')
+@yield('content')
 
 <script type="text/javascript" src="{{ asset('assets/js/jquery-1.11.0.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/js/bootstrap.min.js') }}"></script>

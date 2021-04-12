@@ -9,4 +9,4 @@ class Page extends Model
     //
     protected $fillable = ['name','text','alias','images'];
 
-}
+   }

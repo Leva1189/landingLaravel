@@ -8,7 +8,7 @@ use App\Http\Requests;
 
 use App\Page;
 
-class PageController extends Controller
+class PagesController extends Controller
 {
 
     //

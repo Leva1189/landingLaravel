@@ -17,7 +17,7 @@
 <body>
 
 <header id="header_wrapper">
-	@yield('header') 
+	@yield('header')
 	
 	
 @if (count($errors) > 0)

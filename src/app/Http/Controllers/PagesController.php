@@ -2,40 +2,28 @@
 
 namespace App\Http\Controllers;
 
+use App\Page;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
-use App\Page;
-
 class PagesController extends Controller
 {
-
     //
 
-    public function execute($alias) {
+    public function execute(){
+        if (view()->exists('admin.pages')){
 
-        if(!$alias) {
-            abort(404);
-        }
-
-        if(view()->exists('site.page')) {
-
-            // WHere `alias` = $alias
-            $page = Page::where('alias',strip_tags($alias))->first();
+            $pages = Page::all();
 
             $data = [
-
-                'title' => $page->name,
-                'page' => $page
-
+                'title'=>'Страницы',
+                'pages'=>$pages
             ];
 
-            return view('site.page',$data);
+            return view('admin.pages', $data);
         }
-        else {
-            abort(404);
-        }
+        abort(404);
 
     }
 }
